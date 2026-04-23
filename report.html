@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Report</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px auto; max-width: 880px; line-height: 1.65; color: #2f2430; padding: 0 16px 50px; }
+      h1, h2 { color: #1e1720; }
+      code { background: #f7eef4; padding: 2px 4px; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <h1>Coursework Project Report</h1>
+    <h2>1. Overview</h2>
+    <p>
+      This website is designed as a modern portfolio-style coursework project with
+      three main pages: Home, About, and Multiplayer Puzzle Game. The visual style
+      follows Apple-inspired minimalism with pastel pink and white as the core
+      palette.
+    </p>
+    <h2>2. Technical Stack</h2>
+    <p>
+      The project uses only required technologies: HTML5, CSS3, Vanilla JavaScript,
+      Node.js, Express, and Socket.io. No extra dependencies were added.
+    </p>
+    <h2>3. UI/UX Design Strategy</h2>
+    <p>
+      The UI focuses on clean hierarchy, whitespace, and elegant typography.
+      Advanced but lightweight effects are implemented, including particle
+      background, cursor glow, 3D hover cards, smooth transitions, and scroll
+      reveal animation.
+    </p>
+    <h2>4. Multiplayer Game Logic</h2>
+    <ul>
+      <li>4x4 board and 16 unique blocks (4 shapes x 4 colors)</li>
+      <li>Turn-based rotation with dynamic player list</li>
+      <li>Random block assignment to active player only</li>
+      <li>Line match detection (horizontal/vertical/diagonal)</li>
+      <li>Block removal + score increments</li>
+      <li>Full board jackpot: +16 points and full clear</li>
+      <li>Timeout/disconnect handling for robust session state</li>
+    </ul>
+    <h2>5. Reflection</h2>
+    <p>
+      The main challenge was synchronizing real-time state updates while preserving
+      a premium visual experience. Separating global visual scripts and game-specific
+      scripts improved maintainability and clarity.
+    </p>
+    <h2>6. Run Instructions</h2>
+    <p>
+      Install and run with <code>npm install</code> and <code>npm start</code>,
+      then open <code>http://localhost:8080</code>.
+    </p>
+  </body>
+</html>
