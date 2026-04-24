@@ -125,50 +125,9 @@ function setupHeroIntroTyping() {
 
 function setupSidebar() {
   const sidebar = document.getElementById("portfolio-sidebar");
-  const toggle = document.querySelector(".sidebar-toggle");
-  const closeTargets = document.querySelectorAll("[data-sidebar-close]");
-  const sidebarLinks = document.querySelectorAll(".sidebar-link");
-  if (!sidebar || !toggle) return;
+  if (!sidebar) return;
 
-  function openSidebar() {
-    body.classList.add("sidebar-open");
-    toggle.setAttribute("aria-expanded", "true");
-    sidebar.setAttribute("aria-hidden", "false");
-  }
-
-  function closeSidebar() {
-    body.classList.remove("sidebar-open");
-    toggle.setAttribute("aria-expanded", "false");
-    sidebar.setAttribute("aria-hidden", "true");
-  }
-
-  toggle.addEventListener("click", () => {
-    if (body.classList.contains("sidebar-open")) {
-      closeSidebar();
-      return;
-    }
-    openSidebar();
-  });
-
-  closeTargets.forEach((item) => {
-    item.addEventListener("click", closeSidebar);
-  });
-
-  sidebarLinks.forEach((link) => {
-    link.addEventListener("click", closeSidebar);
-  });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeSidebar();
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 1200) {
-      closeSidebar();
-    }
-  });
+  sidebar.setAttribute("aria-hidden", "false");
 }
 
 // Background motion effects are intentionally disabled.

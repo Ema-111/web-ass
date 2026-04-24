@@ -6,23 +6,14 @@
     <title>Yiman Li | Portfolio Home</title>
     <link rel="stylesheet" href="/public/css/main.css" />
   </head>
-  <body class="home-page">
-    <button class="sidebar-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portfolio-sidebar">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="sidebar-overlay" data-sidebar-close></div>
-    <aside id="portfolio-sidebar" class="sidebar-shell" aria-hidden="true">
+  <body class="home-page sidebar-hover-page">
+    <aside id="portfolio-sidebar" class="sidebar-shell" aria-label="Portfolio sidebar">
+      <div class="sidebar-hover-hint" aria-hidden="true"></div>
       <div class="sidebar-header">
         <div>
           <p class="sidebar-kicker">Navigation</p>
           <h2>My World</h2>
         </div>
-        <button class="sidebar-close" type="button" aria-label="Close navigation menu" data-sidebar-close>
-          <span></span>
-          <span></span>
-        </button>
       </div>
       <nav class="sidebar-nav" aria-label="Portfolio sidebar">
         <a class="sidebar-link active" href="/" data-transition="true">
@@ -45,17 +36,6 @@
           </span>
           <span>About Me</span>
         </a>
-        <a class="sidebar-link" href="/about#artworks-wings" data-transition="true">
-          <span class="sidebar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3a9 9 0 1 0 9 9c0-1.2-.24-2.35-.68-3.4a2 2 0 0 0-2.54-1.1L15.9 8.2a2 2 0 0 0-1.24 1.85V11a2 2 0 0 1-2 2h-1.1a1.9 1.9 0 1 0 0 3.8H12"></path>
-              <circle cx="7.5" cy="11.5" r="1"></circle>
-              <circle cx="10" cy="8.5" r="1"></circle>
-              <circle cx="8.5" cy="15" r="1"></circle>
-            </svg>
-          </span>
-          <span>Artworks-Wings</span>
-        </a>
         <a class="sidebar-link" href="/game" data-transition="true">
           <span class="sidebar-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -68,18 +48,6 @@
             </svg>
           </span>
           <span>Online Game</span>
-        </a>
-        <a class="sidebar-link" href="/report.html" data-transition="true">
-          <span class="sidebar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20"></path>
-              <path d="M6.5 3v18A2.5 2.5 0 0 1 4 18.5"></path>
-              <path d="M8 7h8"></path>
-              <path d="M8 11h8"></path>
-              <path d="M8 15h5"></path>
-            </svg>
-          </span>
-          <span>My Trace</span>
         </a>
       </nav>
     </aside>
