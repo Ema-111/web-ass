@@ -77,19 +77,44 @@
       </section>
 
       <section class="screen-panel">
-        <section class="game-layout">
-          <article class="card reveal">
-            <h2 style="margin-top: 0">Game Board</h2>
+        <section class="game-container">
+          <article class="game-card board-card reveal">
+            <div class="card-header">
+              <h2>Game Board</h2>
+            </div>
             <div id="board" class="board"></div>
           </article>
-          <aside class="card reveal">
-            <h2 style="margin-top: 0">Game Info</h2>
-            <p><strong>Current Turn:</strong> <span id="turn-name">-</span></p>
-            <p><strong>Pool Size:</strong> <span id="pool-size">16</span></p>
-            <p><strong>Time Left:</strong> <span id="timer-text">-</span></p>
-            <p><strong>Your Block:</strong> <span id="my-block">None</span></p>
-            <h3>Players</h3>
-            <ul id="player-list"></ul>
+          <aside class="game-card info-card reveal">
+            <div class="card-header">
+              <h2>Game Status</h2>
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <label>Current Turn</label>
+                <div class="info-value" id="turn-name">-</div>
+              </div>
+              <div class="info-item">
+                <label>Pool Size</label>
+                <div class="info-value" id="pool-size">16</div>
+              </div>
+            </div>
+            
+            <div class="timer-section">
+              <label>Time Left</label>
+              <div class="timer-display" id="timer-text">-</div>
+            </div>
+
+            <div class="block-preview-section">
+              <label>Your Block</label>
+              <div class="block-preview" id="my-block">
+                <span class="block-content">None</span>
+              </div>
+            </div>
+
+            <div class="players-section">
+              <label>Players</label>
+              <ul id="player-list" class="player-list"></ul>
+            </div>
           </aside>
         </section>
       </section>
