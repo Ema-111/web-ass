@@ -81,42 +81,69 @@ function emitState() {
   io.emit("game:state", publicState());
 }
 
+function clearExistingTimer() {
+  if (game.timerId) {
+    clearTimeout(game.timerId);
+    game.timerId = null;
+  }
+}
+
+function handleTurnTimeout(playerId) {
+  const cp = currentPlayer();
+  if (!cp || cp.id !== playerId) return;
+  const timedOutName = cp.name;
+  if (game.currentBlock) {
+    game.pool.push(game.currentBlock);
+    game.currentBlock = null;
+  }
+  game.turnExpiresAt = null;
+  game.timerId = null;
+  io.emit("game:message", `${timedOutName} timed out. Skipping turn.`);
+  nextTurn();
+}
+
 function resetTimer() {
-  if (game.timerId) clearTimeout(game.timerId);
+  clearExistingTimer();
   if (!currentPlayer() || !game.currentBlock) {
     game.turnExpiresAt = null;
-    game.timerId = null;
     return;
   }
   game.turnExpiresAt = Date.now() + TURN_TIMEOUT_MS;
-  const active = currentPlayer();
-  game.timerId = setTimeout(() => {
-    if (active) removePlayer(active.id, "Turn timeout");
-  }, TURN_TIMEOUT_MS);
+  const activeId = currentPlayer().id;
+  game.timerId = setTimeout(() => handleTurnTimeout(activeId), TURN_TIMEOUT_MS);
+}
+
+function chooseNextBlock() {
+  if (game.pool.length === 0) {
+    game.pool = shuffle(createPool());
+  }
+  const index = Math.floor(Math.random() * game.pool.length);
+  const [block] = game.pool.splice(index, 1);
+  return block;
 }
 
 function nextBlockForCurrentPlayer() {
   const cp = currentPlayer();
   if (!cp) {
     game.currentBlock = null;
-    resetTimer();
+    clearExistingTimer();
+    game.turnExpiresAt = null;
     emitState();
     return;
   }
-  if (game.pool.length === 0) game.pool = shuffle(createPool());
-  const index = Math.floor(Math.random() * game.pool.length);
-  const [block] = game.pool.splice(index, 1);
-  game.currentBlock = block;
+
+  game.currentBlock = chooseNextBlock();
   resetTimer();
   emitState();
-  io.to(cp.id).emit("game:your-block", block);
+  io.to(cp.id).emit("game:your-block", game.currentBlock);
 }
 
 function nextTurn() {
   if (game.players.length === 0) {
     game.currentTurnIndex = 0;
     game.currentBlock = null;
-    resetTimer();
+    clearExistingTimer();
+    game.turnExpiresAt = null;
     emitState();
     return;
   }
@@ -224,7 +251,10 @@ function removePlayer(socketId, reason) {
   io.to(leftPlayer.id).emit("game:message", `${reason}, removed from game.`);
 
   if (wasCurrent) {
-    game.currentBlock = null;
+    if (game.currentBlock) {
+      game.pool.push(game.currentBlock);
+      game.currentBlock = null;
+    }
     nextBlockForCurrentPlayer();
   } else {
     emitState();
@@ -252,6 +282,8 @@ io.on("connection", (socket) => {
       nextBlockForCurrentPlayer();
     }
   });
+
+  socket.on("game:leave", () => removePlayer(socket.id, "Left the game"));
 
   socket.on("game:place", ({ row, col }) => {
     const cp = currentPlayer();
