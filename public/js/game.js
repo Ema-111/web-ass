@@ -4,6 +4,7 @@ const boardEl = document.getElementById("board");
 const joinBtn = document.getElementById("join-btn");
 const nameInput = document.getElementById("name-input");
 const statusText = document.getElementById("status-text");
+statusText.classList.add("status-badge");
 const playerList = document.getElementById("player-list");
 const turnName = document.getElementById("turn-name");
 const poolSize = document.getElementById("pool-size");
@@ -49,10 +50,12 @@ function createBoard() {
 
 function onPlace(event) {
   if (!myTurn) {
+    statusText.classList.remove("is-your-turn");
     statusText.textContent = "Not your turn now.";
     return;
   }
   if (!assignedBlock) {
+    statusText.classList.remove("is-your-turn");
     statusText.textContent = "Waiting for your random block...";
     return;
   }
@@ -63,6 +66,7 @@ function onPlace(event) {
   // FIX 3: Validate locally before sending to avoid the unnecessary
   // network round-trip and give instant feedback to the player.
   if (localBoard[row][col]) {
+    statusText.classList.remove("is-your-turn");
     statusText.textContent = "That cell is already occupied. Pick another.";
     return;
   }
@@ -130,6 +134,7 @@ function renderState(state) {
 
   const wasMyTurn = myTurn;
   myTurn = state.currentPlayerId === myId;
+  statusText.classList.toggle("is-your-turn", myTurn);
 
   // FIX 2: Only clear the assigned block when the turn actually
   // switches away from this player.  Previously assignedBlock was
@@ -157,12 +162,14 @@ socket.on("disconnect", () => {
     timerId = null;
   }
   timerText.textContent = "-";
+  statusText.classList.remove("is-your-turn");
   statusText.textContent = "Disconnected from server.";
 });
 
 joinBtn.addEventListener("click", () => {
   const name = nameInput.value.trim();
   if (!name) {
+    statusText.classList.remove("is-your-turn");
     statusText.textContent = "Please enter a name first.";
     return;
   }
@@ -179,10 +186,12 @@ socket.on("game:state", renderState);
 socket.on("game:your-block", (block) => {
   assignedBlock = block;
   myBlock.textContent = `${block.color} ${block.shape}`;
+  statusText.classList.add("is-your-turn");
   statusText.textContent = "Your turn! Click an empty cell to place your block.";
 });
 
 socket.on("game:message", (message) => {
+  statusText.classList.toggle("is-your-turn", message.includes("Your turn"));
   statusText.textContent = message;
 });
 

@@ -6,7 +6,7 @@
     <title>Yiman Li | Multiplayer Puzzle Game</title>
     <link rel="stylesheet" href="/public/css/main.css" />
   </head>
-  <body class="sidebar-hover-page">
+  <body class="sidebar-hover-page game-page">
     <aside id="portfolio-sidebar" class="sidebar-shell" aria-label="Portfolio sidebar">
       <div class="sidebar-hover-hint" aria-hidden="true"></div>
       <div class="sidebar-header">
@@ -62,18 +62,28 @@
 
     <main class="fullpage-main">
       <section class="screen-panel">
-        <section class="card reveal">
-          <h1 style="margin-top: 0">Multiplayer Puzzle Game</h1>
-          <p class="small">
-            Enter your name, join the turn queue, and place your assigned random
-            block on the 4x4 board. Match 3+ same shape or same color to score.
-          </p>
-          <div class="controls">
-            <input id="name-input" type="text" maxlength="20" placeholder="Player name" />
-            <button id="join-btn" type="button">Join Game</button>
-            <span id="status-text" class="small">Not joined.</span>
+        <div class="game-lobby reveal">
+          <div class="lobby-content">
+            <div class="lobby-header">
+              <h1>Multiplayer Puzzle Game</h1>
+              <p class="lobby-desc">Enter your name, join the turn queue, and place your assigned random block on the 4x4 board. Match 3+ same shape or same color to score.</p>
+            </div>
+            
+            <div class="lobby-controls">
+              <div class="input-group">
+                <input id="name-input" type="text" maxlength="20" placeholder="Enter your player name" class="lobby-input" />
+                <div class="input-focus-ring"></div>
+              </div>
+              
+              <button id="join-btn" type="button" class="lobby-btn">
+                <span class="btn-text">Join Game</span>
+                <span class="btn-glow"></span>
+              </button>
+              
+              <span id="status-text" class="status-badge">Not joined</span>
+            </div>
           </div>
-        </section>
+        </div>
       </section>
 
       <section class="screen-panel">
