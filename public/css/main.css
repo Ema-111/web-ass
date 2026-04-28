@@ -906,17 +906,21 @@ main {
 
 .about-page .panel-title {
   font-size: clamp(1.9rem, 2.8vw, 2.4rem);
+  color: #3f2f53;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.35);
 }
 
 .about-page .timeline-item h3 {
   margin: 0 0 10px;
   font-size: 1.38rem;
+  color: #4f3c63;
 }
 
 .about-page .timeline-item p {
   margin: 0;
   font-size: 1.16rem;
   line-height: 1.75;
+  color: #63506f;
 }
 
 .about-page .achievement-list {
@@ -924,10 +928,332 @@ main {
   padding-left: 1.25rem;
   font-size: 1.16rem;
   line-height: 1.9;
+  color: #5e4b6b;
 }
 
 .about-page .achievement-list li {
   margin-bottom: 4px;
+}
+
+.about-page .achievement-list li::marker {
+  color: #b67fd8;
+}
+
+.about-page .timeline-item p strong,
+.about-page .timeline-item h3 strong,
+.about-page .achievement-list strong {
+  color: #6f4f8e;
+}
+
+.about-page .journey-board {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  grid-template-areas:
+    "polaroids quote"
+    "map story";
+}
+
+.about-page .journal-card {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(255, 243, 249, 0.78));
+  border: 1px solid rgba(238, 197, 224, 0.48);
+  border-radius: 24px;
+  box-shadow: 0 18px 42px rgba(194, 150, 187, 0.14);
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.about-page .journal-card--polaroids {
+  grid-area: polaroids;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.about-page .mini-polaroid {
+  width: 31%;
+  min-height: 200px;
+  border-radius: 10px;
+  border: 1px solid rgba(211, 188, 219, 0.6);
+  background: linear-gradient(180deg, #ffffff, #fff6fb);
+  box-shadow: 0 12px 24px rgba(173, 143, 185, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.about-page .mini-polaroid:nth-child(1) {
+  transform: rotate(-6deg);
+}
+
+.about-page .mini-polaroid:nth-child(2) {
+  transform: translateY(10px) rotate(2deg);
+}
+
+.about-page .mini-polaroid:nth-child(3) {
+  transform: rotate(6deg);
+}
+
+.about-page .mini-polaroid img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.about-page .polaroid-caption {
+  font-family: "Playfair Display", serif;
+  font-size: 0.9rem;
+  color: #5c4768;
+  text-align: center;
+  font-weight: 500;
+}
+
+.about-page .journal-card--quote {
+  grid-area: quote;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+}
+
+.about-page .journal-quote {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.45;
+  color: #5d4966;
+}
+
+.about-page .journal-card--map {
+  grid-area: map;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.about-page .journal-card--music-ticket {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.about-page .music-ticket-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin-left: 20px;
+}
+
+.about-page .music-ticket-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.about-page .journal-map-title {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  color: #4f3c63;
+}
+
+.about-page .journal-map-note {
+  margin: 0;
+  font-size: 1.04rem;
+  line-height: 1.75;
+  color: #65536f;
+}
+
+.about-page .journal-card--story {
+  grid-area: story;
+  min-height: 180px;
+}
+
+.about-page .journal-kicker {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.52rem;
+  letter-spacing: 0.02em;
+  color: #5a456b;
+}
+
+.about-page .journal-card--story p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #65536f;
+}
+
+/* ===== Food Journals - Independent Styles ===== */
+.about-page .food-journey-board {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  grid-template-areas:
+    "polaroids quote"
+    "highlight story";
+}
+
+.about-page .food-journal-card {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(255, 243, 249, 0.78));
+  border: 1px solid rgba(238, 197, 224, 0.48);
+  border-radius: 24px;
+  box-shadow: 0 18px 42px rgba(194, 150, 187, 0.14);
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.about-page .food-journal-card--polaroids {
+  grid-area: polaroids;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.about-page .food-mini-polaroid {
+  width: 31%;
+  min-height: 200px;
+  border-radius: 10px;
+  border: 1px solid rgba(211, 188, 219, 0.6);
+  background: linear-gradient(180deg, #ffffff, #fff6fb);
+  box-shadow: 0 12px 24px rgba(173, 143, 185, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.about-page .food-mini-polaroid:nth-child(1) {
+  transform: rotate(-6deg);
+}
+
+.about-page .food-mini-polaroid:nth-child(2) {
+  transform: translateY(10px) rotate(2deg);
+}
+
+.about-page .food-mini-polaroid:nth-child(3) {
+  transform: rotate(6deg);
+}
+
+.about-page .food-mini-polaroid img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.about-page .food-polaroid-caption {
+  font-family: "Playfair Display", serif;
+  font-size: 0.9rem;
+  color: #5c4768;
+  text-align: center;
+  font-weight: 500;
+}
+
+.about-page .food-journal-card--quote {
+  grid-area: quote;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+}
+
+.about-page .food-journal-quote {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.45;
+  color: #5d4966;
+}
+
+.about-page .food-journal-card--highlight {
+  grid-area: highlight;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.about-page .food-highlight-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  margin-left: 0px;
+}
+
+.about-page .food-highlight-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.about-page .food-journal-card--story {
+  grid-area: story;
+  min-height: 180px;
+}
+
+.about-page .food-journal-kicker {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.52rem;
+  letter-spacing: 0.02em;
+  color: #5a456b;
+}
+
+.about-page .food-journal-card--story p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #65536f;
+}
+
+@media (max-width: 920px) {
+  .about-page .food-journey-board {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "polaroids"
+      "quote"
+      "highlight"
+      "story";
+  }
+
+  .about-page .food-journal-card--polaroids {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 920px) {
+  .about-page .journey-board {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "polaroids"
+      "quote"
+      "map"
+      "story";
+  }
+
+  .about-page .journal-card--polaroids {
+    min-height: 200px;
+  }
 }
 
 .timeline-item::before {
