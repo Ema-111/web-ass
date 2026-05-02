@@ -9,12 +9,12 @@
   <body class="sidebar-hover-page game-page">
     <aside id="portfolio-sidebar" class="sidebar-shell" aria-label="Portfolio sidebar">
       <div class="sidebar-hover-hint" aria-hidden="true"></div>
-      <div class="sidebar-header">
+      <header class="sidebar-header">
         <div>
           <p class="sidebar-kicker">Navigation</p>
           <h2>My World</h2>
         </div>
-      </div>
+      </header>
       <nav class="sidebar-nav" aria-label="Portfolio sidebar">
         <a class="sidebar-link" href="/" data-transition="true">
           <span class="sidebar-icon" aria-hidden="true">
@@ -52,8 +52,8 @@
       </nav>
     </aside>
     <header class="navbar">
-      <div class="brand">Yiman Li • Portfolio</div>
-      <nav class="nav-links">
+      <p class="brand">Yiman Li • Portfolio</p>
+      <nav class="nav-links" aria-label="Primary navigation">
         <a data-transition="true" href="/">Home</a>
         <a data-transition="true" href="/about">About</a>
         <a class="active" data-transition="true" href="/game">Game</a>
@@ -65,12 +65,13 @@
         <div class="game-lobby reveal">
           <div class="lobby-content">
             <div class="lobby-header">
-              <h1>Multiplayer Puzzle Game</h1>
+              <h1 id="game-lobby-title">Multiplayer Puzzle Game</h1>
               <p class="lobby-desc">Enter your name, join the turn queue, and place your assigned random block on the 4x4 board. Match 3+ same shape or same color to score.</p>
             </div>
             
             <div class="lobby-controls">
               <div class="input-group">
+                <label for="name-input" class="visually-hidden">Player name</label>
                 <input id="name-input" type="text" maxlength="20" placeholder="Enter your player name" class="lobby-input" />
                 <div class="input-focus-ring"></div>
               </div>
@@ -80,19 +81,19 @@
                 <span class="btn-glow"></span>
               </button>
               
-              <span id="status-text" class="status-badge">Not joined</span>
+              <span id="status-text" class="status-badge" role="status" aria-live="polite">Not joined</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="screen-panel">
-        <section class="game-container">
+      <section class="screen-panel" aria-labelledby="game-board-title">
+        <section class="game-container" aria-label="Game area">
           <article class="game-card board-card reveal">
             <div class="card-header">
-              <h2>Game Board</h2>
+              <h2 id="game-board-title">Game Board</h2>
             </div>
-            <div id="board" class="board"></div>
+            <div id="board" class="board" role="grid" aria-label="4 by 4 game board"></div>
           </article>
           <aside class="game-card info-card reveal">
             <div class="card-header">

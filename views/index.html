@@ -9,12 +9,12 @@
   <body class="home-page sidebar-hover-page">
     <aside id="portfolio-sidebar" class="sidebar-shell" aria-label="Portfolio sidebar">
       <div class="sidebar-hover-hint" aria-hidden="true"></div>
-      <div class="sidebar-header">
+      <header class="sidebar-header">
         <div>
           <p class="sidebar-kicker">Navigation</p>
           <h2>My World</h2>
         </div>
-      </div>
+      </header>
       <nav class="sidebar-nav" aria-label="Portfolio sidebar">
         <a class="sidebar-link active" href="/" data-transition="true">
           <span class="sidebar-icon" aria-hidden="true">
@@ -52,26 +52,26 @@
       </nav>
     </aside>
     <header class="navbar">
-      <div class="brand">Yiman Li • Portfolio</div>
-      <nav class="nav-links">
+      <p class="brand">Yiman Li • Portfolio</p>
+      <nav class="nav-links" aria-label="Primary navigation">
         <a class="active" data-transition="true" href="/">Home</a>
         <a data-transition="true" href="/about">About</a>
         <a data-transition="true" href="/game">Game</a>
       </nav>
     </header>
 
-    <main class="fullpage-main">
+    <main id="main" class="fullpage-main">
       <section class="screen-panel">
-        <div class="hero reveal">
+        <article class="hero reveal">
           <div class="hero-copy">
             <h1 class="hero-title">
               <span class="hero-title-kicker">Hi, I'm</span>
               <img class="hero-title-name-image" src="/public/images/Ema.png" alt="Ema" />
             </h1>
-            <div class="meta">
-              <span class="chip">Software Engineering</span>
-              <span class="chip">ENTJ</span>
-              <span class="chip">"Keep Dreaming"</span>
+            <div class="meta" role="list" aria-label="Profile highlights">
+              <span class="chip" role="listitem">Software Engineering</span>
+              <span class="chip" role="listitem">ENTJ</span>
+              <span class="chip" role="listitem">"Keep Dreaming"</span>
             </div>
             <p id="hero-intro-typing" class="hero-intro-typing"></p>
           </div>
@@ -85,7 +85,7 @@
             </div>
             <img class="profile-photo" src="/public/images/home-profile.png" alt="Yiman Li profile photo" />
           </div>
-        </div>
+        </article>
       </section>
 
       <section class="screen-panel">
