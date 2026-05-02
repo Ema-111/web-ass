@@ -1390,6 +1390,46 @@ main {
   gap: 6px;
 }
 
+.my-block-preview-inner {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.my-block-preview-inner .shape {
+  width: 44px;
+  height: 44px;
+  opacity: 1;
+}
+
+.shape.is-clearing {
+  animation: blockFadeOut 420ms ease forwards;
+}
+
+.cell.is-clearing-cell {
+  pointer-events: none;
+}
+
+@keyframes blockFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: saturate(1);
+  }
+  60% {
+    opacity: 0.55;
+    transform: scale(0.92);
+    filter: saturate(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.75);
+    filter: saturate(0.6);
+  }
+}
+
 .players-section {
   position: relative;
   z-index: 1;
@@ -1415,14 +1455,77 @@ main {
 }
 
 .player-list li {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.62);
   border: 1px solid rgba(230, 193, 219, 0.3);
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 14px;
+  padding: 10px 12px;
   font-size: 0.95rem;
   color: #7c6881;
   transition: all 0.2s ease;
   position: relative;
+}
+
+.player-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.player-name {
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: #6e5a7f;
+  letter-spacing: 0.01em;
+}
+
+.player-score-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 157, 206, 0.4);
+  background: linear-gradient(135deg, rgba(255, 226, 239, 0.82), rgba(227, 236, 255, 0.78));
+  box-shadow: 0 8px 18px rgba(199, 154, 212, 0.14);
+}
+
+.player-score-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9a79c2;
+}
+
+.player-score-value {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: #ff5fa4;
+}
+
+.player-turn-chip {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #3d9b7f;
+  background: rgba(126, 225, 200, 0.18);
+  border: 1px solid rgba(126, 225, 200, 0.45);
+}
+
+.player-row.is-current-turn {
+  border-color: rgba(126, 225, 200, 0.5);
+  background: linear-gradient(135deg, rgba(244, 255, 251, 0.88), rgba(255, 255, 255, 0.82));
+  box-shadow: 0 0 0 2px rgba(126, 225, 200, 0.18), 0 12px 24px rgba(126, 225, 200, 0.08);
+}
+
+.player-row.is-me .player-name {
+  color: #5a4f77;
 }
 
 .player-list li:hover {
@@ -1643,6 +1746,48 @@ main {
   animation: pulse 2s ease-in-out infinite;
 }
 
+.board-hint-wrap {
+  position: fixed;
+  top: max(112px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(920px, calc(100vw - 112px));
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  z-index: 120;
+  pointer-events: none;
+}
+
+.board-status-badge {
+  width: 100%;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 24px rgba(181, 154, 206, 0.16);
+  border: 1px solid rgba(178, 146, 214, 0.26);
+  background: linear-gradient(135deg, rgba(208, 184, 235, 0.18), rgba(255, 255, 255, 0.72));
+  color: #9d80c4;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.985);
+  pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.board-status-badge.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.board-status-badge.is-your-turn {
+  background: linear-gradient(135deg, rgba(158, 235, 215, 0.22), rgba(255, 255, 255, 0.78));
+  color: #4aa488;
+  border-color: rgba(126, 225, 200, 0.42);
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -1729,6 +1874,7 @@ main {
     0 4px 12px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
     inset 0 -2px 4px rgba(0, 0, 0, 0.08);
+  background: var(--block-color);
 }
 
 .shape.circle {
@@ -1737,6 +1883,7 @@ main {
     0 4px 12px rgba(0, 0, 0, 0.12),
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--block-color);
 }
 
 .shape.triangle {
@@ -1744,7 +1891,7 @@ main {
   height: 0;
   border-left: 19px solid transparent;
   border-right: 19px solid transparent;
-  border-bottom: 36px solid;
+  border-bottom: 36px solid var(--block-color);
   background: none !important;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.12)) drop-shadow(inset 0 1px 2px rgba(255, 255, 255, 0.4));
 }
@@ -1755,26 +1902,27 @@ main {
     0 4px 12px rgba(0, 0, 0, 0.12),
     inset 0 1px 2px rgba(255, 255, 255, 0.6),
     inset 0 -2px 4px rgba(0, 0, 0, 0.08);
+  background: var(--block-color);
 }
 
 .rose {
   background: linear-gradient(135deg, #ff8db9, #ff7fb2);
-  border-bottom-color: #ff6ba5;
+  border-bottom-color: var(--block-color, #ff6ba5);
 }
 
 .lavender {
   background: linear-gradient(135deg, #d4b1ff, #c7a4ff);
-  border-bottom-color: #b890ff;
+  border-bottom-color: var(--block-color, #b890ff);
 }
 
 .mint {
   background: linear-gradient(135deg, #8cf3d5, #7ee8c8);
-  border-bottom-color: #6dd9b8;
+  border-bottom-color: var(--block-color, #6dd9b8);
 }
 
 .sky {
   background: linear-gradient(135deg, #8ed5ff, #7ec9ff);
-  border-bottom-color: #6cbdff;
+  border-bottom-color: var(--block-color, #6cbdff);
 }
 
 @media (max-width: 980px) {
@@ -1782,6 +1930,16 @@ main {
     width: min(1120px, calc(100% - 76px));
     margin-left: auto;
     margin-right: 12px;
+  }
+
+  .board-hint-wrap {
+    top: max(98px, env(safe-area-inset-top));
+    width: calc(100vw - 86px);
+  }
+
+  .board-status-badge {
+    padding: 12px 18px;
+    font-size: 0.98rem;
   }
 
   .nav-links {
@@ -1827,6 +1985,16 @@ main {
     padding: 22px 16px 20px;
     border-radius: 0 28px 28px 0;
     transform: translateX(calc(-100% + 34px));
+  }
+
+  .player-main {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .player-score-badge {
+    align-self: flex-start;
   }
 
   .sidebar-header,

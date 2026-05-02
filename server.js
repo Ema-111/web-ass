@@ -91,15 +91,13 @@ function clearExistingTimer() {
 function handleTurnTimeout(playerId) {
   const cp = currentPlayer();
   if (!cp || cp.id !== playerId) return;
-  const timedOutName = cp.name;
   if (game.currentBlock) {
     game.pool.push(game.currentBlock);
     game.currentBlock = null;
   }
   game.turnExpiresAt = null;
   game.timerId = null;
-  io.emit("game:message", `${timedOutName} timed out. Skipping turn.`);
-  nextTurn();
+  removePlayer(playerId, "Timed out");
 }
  
 function resetTimer() {
@@ -253,6 +251,8 @@ function removePlayer(socketId, reason) {
   if (game.currentTurnIndex >= game.players.length) game.currentTurnIndex = 0;
  
   io.to(leftPlayer.id).emit("game:message", `${reason}, removed from game.`);
+  io.emit("game:message", `${leftPlayer.name} ${reason.toLowerCase()}.`);
+  emitState();
  
   if (wasCurrent) {
     if (game.currentBlock) {
@@ -260,8 +260,6 @@ function removePlayer(socketId, reason) {
       game.currentBlock = null;
     }
     nextBlockForCurrentPlayer();
-  } else {
-    emitState();
   }
 }
  
@@ -308,8 +306,11 @@ io.on("connection", (socket) => {
     game.board[row][col] = placed;
     game.currentBlock = null;
  
-    const removed = removeMatchedAndScore(cp);
+    let removed = 0;
     const jackpot = clearBoardJackpot(cp);
+    if (!jackpot) {
+      removed = removeMatchedAndScore(cp);
+    }
  
     let msg = `${cp.name} placed ${placed.color} ${placed.shape}.`;
     if (removed > 0) msg += ` Cleared ${removed} blocks (+${removed}).`;
