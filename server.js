@@ -280,18 +280,14 @@ io.on("connection", (socket) => {
     emitState();
  
     if (game.players.length === 1) {
-      // First player: start the game from scratch.
+      game.currentTurnIndex = 0;
+      nextBlockForCurrentPlayer();
+    } else if (!currentPlayer()) {
       game.currentTurnIndex = 0;
       nextBlockForCurrentPlayer();
     } else if (!game.currentBlock && currentPlayer()) {
-      // FIX (server): The game was paused because all previous players
-      // left (currentBlock became null with no active player).  Now
-      // that someone has joined again, resume by handing the current
-      // player their block so the game continues automatically.
       nextBlockForCurrentPlayer();
     }
-  });
- 
   socket.on("game:leave", () => removePlayer(socket.id, "Left the game"));
  
   socket.on("game:place", ({ row, col }) => {
